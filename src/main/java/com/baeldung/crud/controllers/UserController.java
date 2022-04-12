@@ -29,7 +29,7 @@ public class UserController {
         return "index";
     }
     
-    @GetMapping("/signup")
+    @GetMapping("/adduser")
     public String showSignUpForm(User user) {
         return "add-user";
     }
