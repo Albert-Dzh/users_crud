@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="exp" class="col-form-label">Experience</label>
-                            <input type="text" th:field="*{exp}" class="form-control" id="exp" placeholder="1 to 94000000">
+                            <input type="text" th:field="*{exp}" class="form-control" id="exp" placeholder="from 1 to 94000000">
                             <span th:if="${#fields.hasErrors('exp')}" th:errors="*{exp}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
@@ -56,12 +56,12 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="prof" class="col-form-label">Profession</label>
-                            <input type="text" th:field="*{pro}" class="form-control" id="prof" placeholder="1 to 16,26,27,28,30">
+                            <input type="text" th:field="*{pro}" class="form-control" id="prof" placeholder="from 1 to 16,26,27,28,30">
                             <span th:if="${#fields.hasErrors('pro')}" th:errors="*{pro}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="propwr" class="col-form-label">Profession power</label>
-                            <input type="text" th:field="*{propwr}" class="form-control" id="propwr" placeholder="from 0.0 to 1.0">
+                            <input type="text" th:field="*{propwr}" class="form-control" id="propwr" placeholder="from 0.0 to 1">
                             <span th:if="${#fields.hasErrors('propwr')}" th:errors="*{propwr}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
@@ -73,6 +73,26 @@
                             <label for="psy" class="col-form-label">Psy power</label>
                             <input type="text" th:field="*{psy}" class="form-control" id="psy" placeholder="any int">
                             <span th:if="${#fields.hasErrors('psy')}" th:errors="*{psy}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cop" class="col-form-label">Copper money</label>
+                            <input type="text" th:field="*{cup_0}" class="form-control" id="cop" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('cup_0')}" th:errors="*{cup_0}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="silv" class="col-form-label">Silver money</label>
+                            <input type="text" th:field="*{silv}" class="form-control" id="silv" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('silv')}" th:errors="*{silv}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="gold" class="col-form-label">Gold money</label>
+                            <input type="text" th:field="*{silv}" class="form-control" id="gold" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('gold')}" th:errors="*{gold}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="perk" class="col-form-label">Perk money</label>
+                            <input type="text" th:field="*{p78money}" class="form-control" id="perk" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('p78money')}" th:errors="*{p78money}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="str" class="col-form-label">Strength</label>
@@ -100,24 +120,24 @@
                             <span th:if="${#fields.hasErrors('intel')}" th:errors="*{intel}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="cop" class="col-form-label">Copper money</label>
-                            <input type="text" th:field="*{cup_0}" class="form-control" id="cop" placeholder="any positive int">
-                            <span th:if="${#fields.hasErrors('cup_0')}" th:errors="*{cup_0}" class="text-danger"></span>
+                            <label for="dismiss" class="col-form-label">Ban reason</label>
+                            <input type="text" th:field="*{dismiss}" class="form-control" id="dismiss" placeholder="reason">
+                            <span th:if="${#fields.hasErrors('dismiss')}" th:errors="*{dismiss}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="silv" class="col-form-label">Silver money</label>
-                            <input type="text" th:field="*{silv}" class="form-control" id="silv" placeholder="any positive int">
-                            <span th:if="${#fields.hasErrors('silv')}" th:errors="*{silv}" class="text-danger"></span>
+                            <label for="chatblock" class="col-form-label">Chat block until</label>
+                            <input type="text" th:field="*{chatblock}" class="form-control" id="chatblock" placeholder="Time in msec">
+                            <span th:if="${#fields.hasErrors('chatblock')}" th:errors="*{chatblock}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="gold" class="col-form-label">Gold money</label>
-                            <input type="text" th:field="*{silv}" class="form-control" id="gold" placeholder="any positive int">
-                            <span th:if="${#fields.hasErrors('gold')}" th:errors="*{gold}" class="text-danger"></span>
+                            <label for="forumblock" class="col-form-label">Forum block until</label>
+                            <input type="text" th:field="*{forumblock}" class="form-control" id="forumblock" placeholder="Time in msec">
+                            <span th:if="${#fields.hasErrors('forumblock')}" th:errors="*{forumblock}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="perk" class="col-form-label">Perk money</label>
-                            <input type="text" th:field="*{p78money}" class="form-control" id="perk" placeholder="any positive int">
-                            <span th:if="${#fields.hasErrors('p78money')}" th:errors="*{p78money}" class="text-danger"></span>
+                            <label for="bot" class="col-form-label">Bot account</label>
+                            <input type="text" th:field="*{bot}" class="form-control" id="bot" placeholder="0 or 1">
+                            <span th:if="${#fields.hasErrors('bot')}" th:errors="*{bot}" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">

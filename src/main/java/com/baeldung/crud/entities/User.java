@@ -5,14 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
-@ToString
 @NoArgsConstructor
 @Table(name = "users")
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     @SequenceGenerator(name = "user_sequence", sequenceName = "users_id_seq", allocationSize = 1)
@@ -20,7 +19,7 @@ public class User {
 
     @NotBlank(message = "Login is mandatory")
     private String login;
-    
+
     @NotBlank(message = "Password is mandatory")
     private String password;
 
@@ -61,4 +60,13 @@ public class User {
     private int gold;
 
     private int p78money;
+
+    private int bot;
+
+    private String dismiss;
+
+    private int chatblock;
+
+    private int forumblock;
 }
+
