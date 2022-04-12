@@ -25,7 +25,4 @@ public class User {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 }
