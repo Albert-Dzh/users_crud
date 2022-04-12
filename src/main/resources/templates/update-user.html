@@ -14,35 +14,105 @@
             <h2 class="mb-5">Update User</h2>
                 <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
                     <div class="row">
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="login" class="col-form-label">Login</label>
                             <input type="text" th:field="*{login}" class="form-control" id="login" placeholder="login">
                             <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="pass" class="col-form-label">Password</label>
                             <input type="text" th:field="*{password}" class="form-control" id="pass" placeholder="password">
                             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="god" class="col-form-label">Admin</label>
                             <input type="text" th:field="*{god}" class="form-control" id="god" placeholder="0 or 1">
                             <span th:if="${#fields.hasErrors('god')}" th:errors="*{god}" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="exp" class="col-form-label">Experience</label>
-                            <input type="text" th:field="*{exp}" class="form-control" id="exp" placeholder="from 1 to 94000000">
-                            <span th:if="${#fields.hasErrors('exp')}" th:errors="*{exp}" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <label for="clan" class="col-form-label">Clan</label>
                             <input type="text" th:field="*{clan}" class="form-control" id="clan" placeholder="police/admins">
                             <span th:if="${#fields.hasErrors('clan')}" th:errors="*{clan}" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
+                            <label for="sex" class="col-form-label">Sex</label>
+                            <input type="text" th:field="*{man}" class="form-control" id="sex" placeholder="0 female | 1 male">
+                            <span th:if="${#fields.hasErrors('man')}" th:errors="*{man}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="email" class="col-form-label">Email</label>
                             <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="email">
                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="exp" class="col-form-label">Experience</label>
+                            <input type="text" th:field="*{exp}" class="form-control" id="exp" placeholder="from 1 to 94000000">
+                            <span th:if="${#fields.hasErrors('exp')}" th:errors="*{exp}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="hp" class="col-form-label">HP</label>
+                            <input type="text" th:field="*{hp}" class="form-control" id="hp" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('hp')}" th:errors="*{hp}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="prof" class="col-form-label">Profession</label>
+                            <input type="text" th:field="*{pro}" class="form-control" id="prof" placeholder="from 1 to 16,26,27,28,30">
+                            <span th:if="${#fields.hasErrors('pro')}" th:errors="*{pro}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="propwr" class="col-form-label">Profession power</label>
+                            <input type="text" th:field="*{propwr}" class="form-control" id="propwr" placeholder="from 0.0 to 1">
+                            <span th:if="${#fields.hasErrors('propwr')}" th:errors="*{propwr}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="psy" class="col-form-label">Psy power</label>
+                            <input type="text" th:field="*{psy}" class="form-control" id="psy" placeholder="any int">
+                            <span th:if="${#fields.hasErrors('psy')}" th:errors="*{psy}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="str" class="col-form-label">Strength</label>
+                            <input type="text" th:field="*{str}" class="form-control" id="str" placeholder="any int">
+                            <span th:if="${#fields.hasErrors('str')}" th:errors="*{str}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="dex" class="col-form-label">Dexterity</label>
+                            <input type="text" th:field="*{dex}" class="form-control" id="dex" placeholder="any int">
+                            <span th:if="${#fields.hasErrors('dex')}" th:errors="*{dex}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="pow" class="col-form-label">Power</label>
+                            <input type="text" th:field="*{pow}" class="form-control" id="pow" placeholder="any int">
+                            <span th:if="${#fields.hasErrors('pow')}" th:errors="*{pow}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="acc" class="col-form-label">Accuracy</label>
+                            <input type="text" th:field="*{acc}" class="form-control" id="acc" placeholder="any int">
+                            <span th:if="${#fields.hasErrors('acc')}" th:errors="*{acc}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="int" class="col-form-label">Intellect</label>
+                            <input type="text" th:field="*{intel}" class="form-control" id="int" placeholder="any int">
+                            <span th:if="${#fields.hasErrors('intel')}" th:errors="*{intel}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cop" class="col-form-label">Copper money</label>
+                            <input type="text" th:field="*{cup_0}" class="form-control" id="cop" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('cup_0')}" th:errors="*{cup_0}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="silv" class="col-form-label">Silver money</label>
+                            <input type="text" th:field="*{silv}" class="form-control" id="silv" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('silv')}" th:errors="*{silv}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="gold" class="col-form-label">Gold money</label>
+                            <input type="text" th:field="*{silv}" class="form-control" id="gold" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('gold')}" th:errors="*{gold}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="perk" class="col-form-label">Perk money</label>
+                            <input type="text" th:field="*{p78money}" class="form-control" id="perk" placeholder="any positive int">
+                            <span th:if="${#fields.hasErrors('p78money')}" th:errors="*{p78money}" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">

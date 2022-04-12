@@ -10,7 +10,6 @@ import javax.validation.constraints.*;
 @Entity
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
 public class User {
     
@@ -27,10 +26,39 @@ public class User {
 
     private String god;
 
-    private int exp;
-
     private String clan;
+
+    private int man;
 
     private String email;
 
+    private int exp;
+
+    private int hp;
+
+    private int pro;
+
+    private double propwr;
+
+    private int rankPoints;
+
+    private int psy;
+
+    private int str;
+
+    private int dex;
+
+    private int pow;
+
+    private int acc;
+
+    private int intel;
+
+    private int cup_0;
+
+    private int silv;
+
+    private int gold;
+
+    private int p78money;
 }
