@@ -22,10 +22,10 @@ public class UserController {
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
-    @GetMapping("/index")
+
+    @GetMapping(path = {"", "/index"})
     public String showUserList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userRepository.findAllByOrderById());
         return "index";
     }
     
