@@ -3,7 +3,7 @@ package com.baeldung.crud.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -19,10 +19,18 @@ public class User {
     @SequenceGenerator(name = "user_sequence", sequenceName = "users_id_seq", allocationSize = 1)
     private int id;
 
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank(message = "Login is mandatory")
     private String login;
     
-    @NotBlank(message = "Email is mandatory")
+    @NotBlank(message = "Password is mandatory")
+    private String password;
+
+    private String god;
+
+    private int exp;
+
+    private String clan;
+
     private String email;
 
 }

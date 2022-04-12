@@ -12,29 +12,45 @@
     <body>
         <div class="container my-5">
             <h2 class="mb-5">Update User</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="login" class="col-form-label">Login</label>
-                                <input type="text" th:field="*{login}" class="form-control" id="login" placeholder="Login">
-                                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="email" class="col-form-label">Email</label>
-                                <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email">
-                                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
-                            </div>
+                <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label for="login" class="col-form-label">Login</label>
+                            <input type="text" th:field="*{login}" class="form-control" id="login" placeholder="login">
+                            <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="text-danger"></span>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mt-5">
-                                <input type="submit" class="btn btn-primary" value="Update User">
-                            </div>
-                        </div>    
-                    </form>
-                </div>
+                        <div class="form-group col-md-2">
+                            <label for="pass" class="col-form-label">Password</label>
+                            <input type="text" th:field="*{password}" class="form-control" id="pass" placeholder="password">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="god" class="col-form-label">Admin</label>
+                            <input type="text" th:field="*{god}" class="form-control" id="god" placeholder="0 or 1">
+                            <span th:if="${#fields.hasErrors('god')}" th:errors="*{god}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="exp" class="col-form-label">Experience</label>
+                            <input type="text" th:field="*{exp}" class="form-control" id="exp" placeholder="from 1 to 94000000">
+                            <span th:if="${#fields.hasErrors('exp')}" th:errors="*{exp}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="clan" class="col-form-label">Clan</label>
+                            <input type="text" th:field="*{clan}" class="form-control" id="clan" placeholder="police/admins">
+                            <span th:if="${#fields.hasErrors('clan')}" th:errors="*{clan}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="email" class="col-form-label">Email</label>
+                            <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="email">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <input type="submit" class="btn btn-primary" value="Update User">
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
     </body>
 </html>
