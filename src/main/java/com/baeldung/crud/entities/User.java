@@ -5,7 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Getter
+@Setter
 @Entity
 @ToString
 @NoArgsConstructor
@@ -16,15 +17,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     @SequenceGenerator(name = "user_sequence", sequenceName = "users_id_seq", allocationSize = 1)
-    private long id;
+    private int id;
+
     @NotBlank(message = "Name is mandatory")
-    private String name;
+    private String login;
     
     @NotBlank(message = "Email is mandatory")
     private String email;
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
-
 }
