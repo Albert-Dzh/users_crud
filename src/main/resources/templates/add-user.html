@@ -164,7 +164,7 @@
                         <div class="form-group col-md-3">
                             <label class="col-form-label" for="bot">Account type</label>
                             <select th:field="*{bot}" class="form-control" id="bot">
-                                <option th:value="0" >standard account</option>
+                                <option th:value="0" >casual account</option>
                                 <option th:value="1">bot account</option>
                             </select>
                             <span th:if="${#fields.hasErrors('bot')}" th:errors="*{bot}" class="text-danger"></span>
