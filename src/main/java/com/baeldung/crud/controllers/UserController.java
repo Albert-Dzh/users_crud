@@ -30,7 +30,8 @@ public class UserController {
     }
     
     @GetMapping("/adduser")
-    public String showSignUpForm(User user) {
+    public String showSignUpForm(User user, Model model) {
+        model.addAttribute("user", user);
         return "add-user";
     }
     
