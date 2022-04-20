@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="container my-5">
-            <h2 class="mb-5">Update User</h2>
+            <h2 class="mb-5" th:text="${'Edit user ' + user.login}"></h2>
                 <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
                     <div class="row">
                         <div class="form-group col-md-3">
