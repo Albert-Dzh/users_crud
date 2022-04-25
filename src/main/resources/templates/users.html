@@ -21,7 +21,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Login</th>
-                                    <th>Edit</th>
+                                    <th>Params</th>
+                                    <th>Items</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                     <td th:text="${user.id}"></td>
                                     <td th:text="${user.login}"></td>
                                     <td><a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit<i class="fas fa-user-edit ml-2"></i></a></td>
+                                    <td><a th:href="@{/edit/{id}/items(id=${user.id})}" class="btn btn-primary">Manage Items<i class="fas fa-list ml-2"></i></a></td>
                                     <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-primary">Remove<i class="fas fa-user-times ml-2"></i></a></td>
                                 </tr>
                             </tbody>
