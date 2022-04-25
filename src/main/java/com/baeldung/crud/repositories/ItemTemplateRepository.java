@@ -10,5 +10,4 @@ import java.util.List;
 public interface ItemTemplateRepository extends CrudRepository<ItemTemplate, Integer> {
 
     List<ItemTemplate> findAllByOrderById();
-    List<ItemTemplate> findAllByLvlOrderById(String lvl);
 }
