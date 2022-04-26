@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
 
-
         <title>Add itemTemplate</title>
     </head>
 
@@ -21,20 +20,20 @@
                     <h2 class="my-5">User items</h2>
                     <table class="table table-striped table-responsive-md">
                         <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Delete</th>
-                        </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Delete</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item : ${userItems}">
-                            <td th:text="${item.id}"></td>
-                            <td th:text="${item.txt}"></td>
-                            <td th:text="${item.type}"></td>
-                            <td><a th:href="@{/delete/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" class="btn btn-primary">Remove</a></td>
-                        </tr>
+                            <tr th:each="item : ${userItems}">
+                                <td th:text="${item.id}"></td>
+                                <td th:text="${item.txt}"></td>
+                                <td th:text="${item.type}"></td>
+                                <td><a th:href="@{/delete/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" class="btn btn-primary">Remove</a></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
