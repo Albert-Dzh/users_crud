@@ -7,6 +7,7 @@ import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
 import com.baeldung.crud.repositories.ItemTemplateRepository;
 import com.baeldung.crud.repositories.UserItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,17 +23,27 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserItemRepository userItemRepository;
     private final ItemTemplateRepository itemTemplateRepository;
+    private long totalUsers;
 
     @Autowired
     public UserController(UserRepository userRepository, UserItemRepository userItemRepository, ItemTemplateRepository itemTemplateRepository) {
         this.userRepository = userRepository;
         this.userItemRepository = userItemRepository;
         this.itemTemplateRepository = itemTemplateRepository;
+        this.totalUsers = userRepository.count();
     }
 
-    @GetMapping(path = {"/", "/users", "/index"})
-    public String showUserList(Model model) {
-        model.addAttribute("users", userRepository.findAllByOrderById());
+    @GetMapping(path = {"/", "/index"})
+    public String mainRedirect() {
+        return "redirect:/users";
+    }
+
+    @GetMapping("/users")
+    public String showUserList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
+        int usersPerPage = 9;
+        model.addAttribute("curPage", page);
+        model.addAttribute("totalPages", totalUsers / usersPerPage + (totalUsers % usersPerPage == 0 ? 0 : 1));
+        model.addAttribute("users", userRepository.findAllByOrderById(PageRequest.of(page - 1, usersPerPage)));
         return "users";
     }
 
@@ -49,6 +60,8 @@ public class UserController {
         }
 
         userRepository.save(user);
+        totalUsers++;
+
         return "redirect:/users";
     }
 
@@ -76,6 +89,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepository.delete(user);
+        totalUsers--;
 
         return "redirect:/users";
     }
