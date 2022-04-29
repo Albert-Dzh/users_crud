@@ -13,9 +13,8 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-white fixed-top">
             <div class="container">
-                <h3 class="navbar-brand">User items</h3>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home</a>
@@ -25,13 +24,15 @@
         </nav>
         <div th:switch="${userItems.size()}" class="container my-5">
             <h2 th:case="0">No items yet!</h2>
-            <div th:case="*" class="col-md-6">
+            <div th:case="*" class="col-md-8">
+                <h2>User items</h2>
                 <table class="table table-striped table-responsive-md">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Type</th>
+                            <th>Count</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@
                             <td th:text="${item.id}"></td>
                             <td th:text="${item.txt}"></td>
                             <td th:text="${item.type}"></td>
+                            <td th:text="${item.count}"></td>
                             <td><a th:href="@{/delete/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" class="btn btn-primary">Remove</a></td>
                         </tr>
                     </tbody>
@@ -48,13 +50,10 @@
         </div>
 
         <div class="container my-5">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="my-5">Choose item to add</h3>
-                </div>
+            <div class="col-md-6">
                 <form action="#" method="post" th:object="${itemTemplateWrapper}" th:action="@{/edit/{id}/items(id=${userId})}">
                     <div class="form-group">
-                        <label for="item_template" class="col-form-label">Select from available</label>
+                        <label for="item_template" class="col-form-label">Want to add some?</label>
                         <select th:field="${itemTemplateWrapper.item}" id="item_template" class="form-control selectpicker" data-live-search="true">
                             <option th:each="template : ${items}"
                                     th:value="${template.id}"
