@@ -7,7 +7,6 @@ import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
 import com.baeldung.crud.repositories.ItemTemplateRepository;
 import com.baeldung.crud.repositories.UserItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import com.baeldung.crud.entities.User;
 import com.baeldung.crud.repositories.UserRepository;
 
+import java.util.List;
+
 @Controller
 @SuppressWarnings("UnusedParameters")
 public class UserController {
@@ -23,14 +24,12 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserItemRepository userItemRepository;
     private final ItemTemplateRepository itemTemplateRepository;
-    private long totalUsers;
 
     @Autowired
     public UserController(UserRepository userRepository, UserItemRepository userItemRepository, ItemTemplateRepository itemTemplateRepository) {
         this.userRepository = userRepository;
         this.userItemRepository = userItemRepository;
         this.itemTemplateRepository = itemTemplateRepository;
-        this.totalUsers = userRepository.count();
     }
 
     @GetMapping(path = {"/", "/index"})
@@ -41,9 +40,14 @@ public class UserController {
     @GetMapping("/users")
     public String showUserList(@RequestParam(name = "page", required = false, defaultValue = "1") int page, Model model) {
         int usersPerPage = 9;
+        int start = (page - 1) * usersPerPage;
+
+        List<User> allUsers = userRepository.findAllByOrderById();
+        List<User> subList = allUsers.subList(start, Math.min(allUsers.size(), start + usersPerPage));
+
         model.addAttribute("curPage", page);
-        model.addAttribute("totalPages", totalUsers / usersPerPage + (totalUsers % usersPerPage == 0 ? 0 : 1));
-        model.addAttribute("users", userRepository.findAllByOrderById(PageRequest.of(page - 1, usersPerPage)));
+        model.addAttribute("totalPages", Math.ceil(allUsers.size() / (double) usersPerPage));
+        model.addAttribute("users", subList);
         return "users";
     }
 
@@ -60,7 +64,6 @@ public class UserController {
         }
 
         userRepository.save(user);
-        totalUsers++;
 
         return "redirect:/users";
     }
@@ -89,7 +92,6 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepository.delete(user);
-        totalUsers--;
 
         return "redirect:/users";
     }
