@@ -163,12 +163,12 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="chatblock" class="col-form-label">Chat block until</label>
-                        <input type="number" th:field="*{chatblock}" class="form-control" id="chatblock" placeholder="Time in msec">
+                        <input type="date" th:field="*{chatblock}" class="form-control" id="chatblock">
                         <span th:if="${#fields.hasErrors('chatblock')}" th:errors="*{chatblock}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="forumblock" class="col-form-label">Forum block until</label>
-                        <input type="number" th:field="*{forumblock}" class="form-control" id="forumblock" placeholder="Time in msec">
+                        <input type="date" th:field="*{forumblock}" class="form-control" id="forumblock">
                         <span th:if="${#fields.hasErrors('forumblock')}" th:errors="*{forumblock}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-3">

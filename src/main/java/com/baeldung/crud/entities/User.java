@@ -1,9 +1,12 @@
 package com.baeldung.crud.entities;
 
+import com.baeldung.crud.entities.converters.DateToLongConverter;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -65,8 +68,12 @@ public class User {
 
     private String dismiss;
 
-    private int chatblock;
+    @DateTimeFormat (pattern="yyyy-MM-dd")
+    @Convert(converter = DateToLongConverter.class)
+    private LocalDate chatblock;
 
-    private int forumblock;
+    @DateTimeFormat (pattern="yyyy-MM-dd")
+    @Convert(converter = DateToLongConverter.class)
+    private LocalDate forumblock;
 }
 
