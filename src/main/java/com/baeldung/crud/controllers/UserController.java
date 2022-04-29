@@ -96,7 +96,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/edit/{id}/items")
+    @GetMapping("/users/{id}/items")
     public String showItemList(@PathVariable("id") int id,  Model model) {
         model.addAttribute("userItems", userItemRepository.findAllByUserId(id));
         model.addAttribute("items", itemTemplateRepository.findAllByOrderById());
@@ -105,7 +105,7 @@ public class UserController {
         return "items";
     }
 
-    @PostMapping("/edit/{id}/items")
+    @PostMapping("/users/{id}/items")
     public String addItemToUser(@PathVariable("id") int id, @Valid ItemTemplateWrapper wrapper, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "items";
