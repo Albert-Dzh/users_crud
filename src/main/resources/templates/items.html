@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
 
-        <title>Add itemTemplate</title>
+        <title>Items</title>
     </head>
 
     <body>
@@ -39,7 +39,7 @@
                     <tbody>
                         <tr th:each="item : ${userItems}">
                             <td th:text="${item.id}"></td>
-                            <td th:text="${item.txt}"></td>
+                            <td><a th:href="@{/edit/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" th:text="${item.txt}" class="nav-link"></a></td>
                             <td th:text="${item.type}"></td>
                             <td th:text="${item.count}"></td>
                             <td><a th:href="@{/delete/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" class="btn btn-primary">Remove</a></td>

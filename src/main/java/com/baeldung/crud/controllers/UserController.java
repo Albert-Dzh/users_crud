@@ -112,7 +112,28 @@ public class UserController {
         }
 
         userItemRepository.save(new UserItem(wrapper.getItem(), id));
-        return "redirect:/edit/" + id + "/items";
+        return "redirect:/users/" + id + "/items";
+    }
+
+    @GetMapping("/edit/{id}/items/{itemId}")
+    public String editItem(@PathVariable("id") int id, @PathVariable("itemId") int itemId, Model model) {
+        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
+        model.addAttribute("userId", id);
+        model.addAttribute("item", item);
+
+        return "update-item";
+    }
+
+    @PostMapping("/update/{id}/items/{itemId}")
+    public String updateItem(@PathVariable("id") int id, @PathVariable("itemId") int itemId, @Valid UserItem item, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            item.setId(itemId);
+            return "update-item";
+        }
+
+        userItemRepository.save(item);
+
+        return "redirect:/users/" + id + "/items";
     }
 
     @GetMapping("/delete/{id}/items/{itemId}")
