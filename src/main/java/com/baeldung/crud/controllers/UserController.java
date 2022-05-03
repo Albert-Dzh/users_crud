@@ -70,7 +70,7 @@ public class UserController {
     }
 
     @GetMapping("/edit/users")
-    public String showUpdateForm(@RequestParam("id") int id, Model model) {
+    public String showUserUpdateForm(@RequestParam("id") int id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
 
@@ -117,16 +117,15 @@ public class UserController {
     }
 
     @GetMapping("/edit/items")
-    public String editItem(@RequestParam("owner") int userId, @RequestParam("itemId") int itemId, Model model) {
+    public String showItemUpdateForm(@RequestParam("itemId") int itemId, Model model) {
         UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
-        model.addAttribute("userId", userId);
         model.addAttribute("item", item);
 
         return "update-item";
     }
 
     @PostMapping("/update/items")
-    public String updateItem(@RequestParam("owner") int userId, @RequestParam("itemId") int itemId, @Valid UserItem item, BindingResult result, Model model) {
+    public String updateItem(@RequestParam("itemId") int itemId, @Valid UserItem item, BindingResult result, Model model) {
         if (result.hasErrors()) {
             item.setId(itemId);
             return "update-item";
@@ -134,14 +133,14 @@ public class UserController {
 
         userItemRepository.save(item);
 
-        return "redirect:/items?owner=" + userId;
+        return "redirect:/items?owner=" + item.getUserId();
     }
 
     @GetMapping("/delete/items")
-    public String delItemFromUser(@RequestParam("owner") int userId, @RequestParam("itemId") int itemId, Model model) {
+    public String deleteItem(@RequestParam("itemId") int itemId, Model model) {
         UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item Id " + itemId));
         userItemRepository.delete(item);
 
-        return "redirect:/items?owner=" + userId;
+        return "redirect:/items?owner=" + item.getUserId();
     }
 }
