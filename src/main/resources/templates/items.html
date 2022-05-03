@@ -39,10 +39,10 @@
                     <tbody>
                         <tr th:each="item : ${userItems}">
                             <td th:text="${item.id}"></td>
-                            <td><a th:href="@{/edit/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" th:text="${item.txt}" class="nav-link"></a></td>
+                            <td><a th:href="@{/edit/items(owner=${userId}, itemId=${item.id})}" th:text="${item.txt}" class="nav-link"></a></td>
                             <td th:text="${item.type}"></td>
                             <td th:text="${item.count}"></td>
-                            <td><a th:href="@{/delete/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" class="btn btn-primary">Remove</a></td>
+                            <td><a th:href="@{/delete/items/(owner=${userId}, itemId=${item.id})}" class="btn btn-primary">Remove</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -51,7 +51,7 @@
 
         <div class="container my-5">
             <div class="col-md-6">
-                <form action="#" method="post" th:object="${itemTemplateWrapper}" th:action="@{/users/{id}/items(id=${userId})}">
+                <form action="#" method="post" th:object="${itemTemplateWrapper}" th:action="@{/additem(owner=${userId})}">
                     <div class="form-group">
                         <label for="item_template" class="col-form-label">Want to add some?</label>
                         <select th:field="${itemTemplateWrapper.item}" id="item_template" class="form-control selectpicker" data-live-search="true">

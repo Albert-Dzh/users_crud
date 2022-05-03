@@ -16,13 +16,13 @@
                 <h3 class="navbar-brand" th:text="${'Edit item ' + item.txt}"></h3>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/users/{uId}/items(uId=${userId})}">Home</a>
+                        <a class="nav-link" th:href="@{/items(owner=${userId})}">Home</a>
                     </li>
                 </ul>
             </div>
         </nav>
         <div class="container my-5">
-            <form action="#" th:action="@{/update/{uId}/items/{iId}(uId=${userId}, iId=${item.id})}" th:object="${item}" method="post">
+            <form action="#" th:action="@{/update/items(owner=${userId}, itemId=${item.id})}" th:object="${item}" method="post">
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label for="count" class="col-form-label">Count</label>

@@ -22,7 +22,7 @@
             </div>
         </nav>
         <div class="container my-5">
-            <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+            <form action="#" th:action="@{/update/users(id=${user.id})}" th:object="${user}" method="post">
                 <div class="row">
                     <div class="form-group col-md-3">
                         <label for="login" class="col-form-label">Login</label>
