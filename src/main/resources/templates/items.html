@@ -32,7 +32,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Type</th>
-                            <th>Count</th>
+                            <th>Pieces</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -41,7 +41,7 @@
                             <td th:text="${item.id}"></td>
                             <td><a th:href="@{/edit/items(owner=${userId}, itemId=${item.id})}" th:text="${item.txt}" class="nav-link"></a></td>
                             <td th:text="${item.type}"></td>
-                            <td th:text="${item.count}"></td>
+                            <td th:text="${item.count}.isBlank() ? 'non-stackable' : ${item.count}"></td>
                             <td><a th:href="@{/delete/items(owner=${userId}, itemId=${item.id})}" class="btn btn-primary">Remove</a></td>
                         </tr>
                     </tbody>
