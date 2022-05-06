@@ -7,6 +7,7 @@ import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
 import com.baeldung.crud.repositories.ItemTemplateRepository;
 import com.baeldung.crud.repositories.UserItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,13 +39,19 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String showUserList(@RequestParam(name = "page", required = false, defaultValue = "1") int page,
+    public String showUserList(@RequestParam(name = "search", required = false) String login,
+                               @RequestParam(name = "page", required = false, defaultValue = "1") int page,
                                @RequestParam(name = "uppg", required = false, defaultValue = "9") int usersPerPage,
                                Model model) {
 
+        Page<User> users = login != null ?
+                userRepository.findAllByLogin(login, PageRequest.of(page - 1, usersPerPage)) :
+                userRepository.findAllByOrderById(PageRequest.of(page - 1, usersPerPage));
+
         model.addAttribute("curPage", page);
-        model.addAttribute("totalPages", Math.ceil(userRepository.count() / (double) usersPerPage));
-        model.addAttribute("users", userRepository.findAllByOrderById(PageRequest.of(page - 1, usersPerPage)));
+        model.addAttribute("totalPages", users.getTotalPages());
+        model.addAttribute("users", users);
+
         return "users";
     }
 
@@ -95,7 +102,7 @@ public class UserController {
 
     @GetMapping("/items")
     public String showItemList(@RequestParam("owner") int id,  Model model) {
-        model.addAttribute("userItems", userItemRepository.findAllByUserId(id));
+        model.addAttribute("userItems", userItemRepository.findAllByUserIdOrderById(id));
         model.addAttribute("items", itemTemplateRepository.findAllByOrderById());
         model.addAttribute("itemTemplateWrapper", new ItemTemplateWrapper());
         model.addAttribute("userId", id);
