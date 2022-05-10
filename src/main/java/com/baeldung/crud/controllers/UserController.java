@@ -128,13 +128,15 @@ public class UserController {
     }
 
     @PostMapping("/update/items")
-    public String updateItem(@RequestParam("itemId") int itemId, @Valid UserItem item, BindingResult result, Model model) {
+    public String updateItem(@RequestParam("itemId") int itemId, @Valid UserItem dummy, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            item.setId(itemId);
+            dummy.setId(itemId);
             return "update-item";
         }
 
-        userItemRepository.save(item);
+        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
+
+        userItemRepository.save(item.mergedWith(dummy));
 
         return "redirect:/items?owner=" + item.getUserId();
     }

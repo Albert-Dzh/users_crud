@@ -84,6 +84,21 @@ public class UserItem {
         this.userId = userId;
     }
 
+    public UserItem mergedWith(UserItem dummy) {
+        try {
+            for (Field dummyField : dummy.getClass().getDeclaredFields()) {
+                Object var = dummyField.get(dummy);
+                String fldName = dummyField.getName();
+                if (!(fldName.equals("id") || fldName.equals("userId")) && var != null && !var.toString().isEmpty())
+                    dummyField.set(this, var);
+            }
+        }
+        catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
     @Override
     public String toString() {
         return String.format("#%d | %s (sprite: %s) (owner: %d)", id, txt, name, userId);
