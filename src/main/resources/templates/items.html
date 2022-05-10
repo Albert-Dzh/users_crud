@@ -42,7 +42,7 @@
                             <td><a th:href="@{/edit/items(owner=${userId}, itemId=${item.id})}" th:text="${item.txt}" class="nav-link"></a></td>
                             <td th:text="${item.type}"></td>
                             <td th:text="${item.count.isEmpty()} ? 'non-stackable' : ${item.count}"></td>
-                            <td><a th:href="@{/delete/items(owner=${userId}, itemId=${item.id})}" class="btn btn-primary">Remove</a></td>
+                            <td><a th:href="@{/delete/items(owner=${userId}, itemId=${item.id})}" class="btn btn-outline-danger">Remove</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -61,7 +61,7 @@
                             </option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add item</button>
+                    <button type="submit" class="btn btn-success">Add item</button>
                 </form>
             </div>
         </div>

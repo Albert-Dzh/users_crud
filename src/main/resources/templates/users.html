@@ -34,8 +34,8 @@
                     <tr th:each="user : ${users}">
                         <td th:text="${user.id}"></td>
                         <td><a th:href="@{/edit/users(id=${user.id})}" th:text="${user.login}" class="nav-link"></a></td>
-                        <td><a th:href="@{/items(owner=${user.id})}" class="btn btn-primary">Manage Items<i class="fas fa-list ml-2"></i></a></td>
-                        <td><a th:href="@{/delete/users(id=${user.id})}" class="btn btn-primary">Remove<i class="fas fa-user-times ml-2"></i></a></td>
+                        <td><a th:href="@{/items(owner=${user.id})}" class="btn btn-info">Manage Items<i class="fas fa-list ml-2"></i></a></td>
+                        <td><a th:href="@{/delete/users(id=${user.id})}" class="btn btn-outline-danger">Remove<i class="fas fa-user-times ml-2"></i></a></td>
                     </tr>
                     <tr>
                         <td colspan="5"><a th:href="${'/adduser'}" class="nav-link">Add new user<i class="fas fa-user-plus ml-2"></i></a></td>
