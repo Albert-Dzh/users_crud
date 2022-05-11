@@ -24,25 +24,39 @@
         <div class="container my-5">
             <form action="#" th:action="@{/update/items(itemId=${item.id})}" th:object="${item}" method="post">
                 <div class="row">
-                    <div class="form-group col-md-3">
+                    <div th:if="*{count != ''}" class="form-group col-md-3">
                         <label for="count" class="col-form-label">Count</label>
-                        <input type="number" min="0" th:readonly="*{count == ''}" th:field="*{count}" class="form-control" id="count" placeholder="count">
+                        <input type="number" min="0" th:field="*{count}" class="form-control" id="count" placeholder="count">
                         <span th:if="${#fields.hasErrors('count')}" th:errors="*{count}" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div th:if="*{quality != ''}" class="form-group col-md-3">
                         <label for="quality" class="col-form-label">Quality</label>
-                        <input type="number" min="0" th:readonly="*{quality == ''}" th:field="*{quality}" class="form-control" id="quality" placeholder="quality">
+                        <input type="number" min="0" th:field="*{quality}" class="form-control" id="quality" placeholder="quality">
                         <span th:if="${#fields.hasErrors('quality')}" th:errors="*{quality}" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div th:if="*{maxquality != ''}" class="form-group col-md-3">
                         <label for="maxquality" class="col-form-label">Max quality</label>
-                        <input type="number" min="0" th:readonly="*{maxquality == ''}" th:field="*{maxquality}" class="form-control" id="maxquality" placeholder="max quality">
+                        <input type="number" min="0" th:field="*{maxquality}" class="form-control" id="maxquality" placeholder="max quality">
                         <span th:if="${#fields.hasErrors('maxquality')}" th:errors="*{maxquality}" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div th:if="*{min != ''}" class="form-group col-md-3">
                         <label for="min" class="col-form-label">Min requirements</label>
-                        <input type="text" th:readonly="*{min == ''}" th:field="*{min}" class="form-control" id="min" placeholder="min requirements">
+                        <input type="text" th:field="*{min}" class="form-control" id="min" placeholder="min requirements">
                         <span th:if="${#fields.hasErrors('min')}" th:errors="*{min}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="dt" class="col-form-label">Expire date</label>
+                        <input type="date" th:field="*{dt}" class="form-control" id="dt" placeholder="expire date">
+                        <span th:if="${#fields.hasErrors('dt')}" th:errors="*{dt}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="nt" class="col-form-label">Transfer availability</label>
+                        <select th:field="*{nt}" class="form-control" id="nt">
+                            <option th:text="Transferrable" th:value="''"></option>
+                            <option th:text="Non-transferrable" th:value="'1'"></option>
+                            <option th:text="Droppable" th:value="'2'"></option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('nt')}" th:errors="*{nt}" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
