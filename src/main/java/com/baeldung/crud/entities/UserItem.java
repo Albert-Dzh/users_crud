@@ -1,18 +1,24 @@
 package com.baeldung.crud.entities;
 
 
+import com.baeldung.crud.entities.converters.DateToStringConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
+import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "user_item")
+@DynamicInsert
 public class UserItem {
 
     @Id
@@ -30,7 +36,9 @@ public class UserItem {
     private String cost;
     private String count;
     private String damage;
-    private String dt;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Convert(converter = DateToStringConverter.class)
+    private LocalDate dt;
     private String gc;
     private String grouping;
     private String hint;
@@ -88,8 +96,8 @@ public class UserItem {
         try {
             for (Field dummyField : dummy.getClass().getDeclaredFields()) {
                 Object var = dummyField.get(dummy);
-                String fldName = dummyField.getName();
-                if (!(fldName.equals("id") || fldName.equals("userId")) && var != null && !var.toString().isEmpty())
+                Type t = dummyField.getType();
+                if (t.equals(LocalDate.class) || t.equals(String.class) && var != null)
                     dummyField.set(this, var);
             }
         }
@@ -101,6 +109,6 @@ public class UserItem {
 
     @Override
     public String toString() {
-        return String.format("#%d | %s (sprite: %s) (owner: %d)", id, txt, name, userId);
+        return String.format("#%d | %s (sprite: %s) (type: %s) (owner: %d)", id, txt, name, type, userId);
     }
 }
