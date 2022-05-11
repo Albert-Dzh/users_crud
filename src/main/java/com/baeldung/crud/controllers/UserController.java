@@ -44,9 +44,10 @@ public class UserController {
                                @RequestParam(name = "uppg", required = false, defaultValue = "9") int usersPerPage,
                                Model model) {
 
-        Page<User> users = login != null ?
-                userRepository.findAllByLogin(login, PageRequest.of(page - 1, usersPerPage)) :
-                userRepository.findAllByOrderById(PageRequest.of(page - 1, usersPerPage));
+        PageRequest request = PageRequest.of(page - 1, usersPerPage);
+        Page<User> users = login == null ?
+                userRepository.findAllByOrderById(request) :
+                userRepository.findAllByLogin(login, request);
 
         model.addAttribute("curPage", page);
         model.addAttribute("totalPages", users.getTotalPages());
