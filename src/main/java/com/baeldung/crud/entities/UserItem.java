@@ -109,6 +109,6 @@ public class UserItem {
 
     @Override
     public String toString() {
-        return String.format("#%d | %s (sprite: %s) (type: %s) (owner: %d)", id, txt, name, type, userId);
+        return String.format("%s (sprite: %s) (type: %s) (owner: %d)", txt, name, type, userId);
     }
 }

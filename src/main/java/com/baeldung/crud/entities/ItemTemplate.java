@@ -75,6 +75,6 @@ public class ItemTemplate {
 
     @Override
     public String toString() {
-        return String.format("#%d | %s | sprite: %s | type: %s", id, txt, name, type);
+        return String.format("%s | sprite: %s | type: %s", txt, name, type);
     }
 }
