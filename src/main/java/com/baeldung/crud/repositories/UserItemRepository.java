@@ -1,11 +1,11 @@
 package com.baeldung.crud.repositories;
 
 import com.baeldung.crud.entities.UserItem;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 public interface UserItemRepository extends CrudRepository<UserItem, Integer> {
 
-    List<UserItem> findAllByUserIdOrderById(int id);
+    Page<UserItem> findAllByUserIdOrderById(int id, Pageable pageable);
 }

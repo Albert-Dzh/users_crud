@@ -17,13 +17,11 @@
             <div class="container">
                 <a class="navbar-brand nav-link" href="#">User items</a>
             </div>
-            <div class="container">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Back to users list</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Back to users list</a>
+                </li>
+            </ul>
         </nav>
         <div class="container my-5">
             <div class="col-md-8">
@@ -47,6 +45,19 @@
                         </tr>
                     </tbody>
                 </table>
+                <nav aria-label="Pagination" th:if="${totalPages > 1}">
+                    <ul class="pagination justify-content-center font-weight-medium">
+                        <th:block th:each="i : ${#numbers.sequence(1, totalPages)}"
+                                  th:with="validPage=${i == 1 || (i >= curPage - 3 && i <= curPage + 3) || i == totalPages}">
+                            <li th:if="${validPage}" class="page-item" th:classappend="${curPage eq i} ? 'active'">
+                                <a class="page-link svg-icon" th:href="@{/items(owner=${userId}, page=${i})}" th:text="${i}"></a>
+                            </li>
+                            <li class="page-item disabled" th:if="${not validPage and (i == curPage - 4 or i == curPage + 4)}">
+                                <a class="page-link" href="#">...</a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </nav>
             </div>
         </div>
 

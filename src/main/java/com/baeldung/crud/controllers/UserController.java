@@ -102,8 +102,16 @@ public class UserController {
     }
 
     @GetMapping("/items")
-    public String showItemList(@RequestParam("owner") int id,  Model model) {
-        model.addAttribute("userItems", userItemRepository.findAllByUserIdOrderById(id));
+    public String showItemList(@RequestParam("owner") int id,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                               @RequestParam(value = "ippg", required = false, defaultValue = "7") int itemsPerPage,
+                               Model model) {
+
+        Page<UserItem> items = userItemRepository.findAllByUserIdOrderById(id, PageRequest.of(page - 1, itemsPerPage));
+
+        model.addAttribute("userItems", items);
+        model.addAttribute("curPage", page);
+        model.addAttribute("totalPages", items.getTotalPages());
         model.addAttribute("items", itemTemplateRepository.findAllByOrderById());
         model.addAttribute("itemTemplateWrapper", new ItemTemplateWrapper());
         model.addAttribute("userId", id);
