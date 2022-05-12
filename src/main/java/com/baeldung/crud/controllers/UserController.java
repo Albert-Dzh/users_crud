@@ -2,10 +2,6 @@ package com.baeldung.crud.controllers;
 
 import javax.validation.Valid;
 
-import com.baeldung.crud.entities.UserItem;
-import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
-import com.baeldung.crud.repositories.ItemTemplateRepository;
-import com.baeldung.crud.repositories.UserItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,14 +19,11 @@ import com.baeldung.crud.repositories.UserRepository;
 public class UserController {
     
     private final UserRepository userRepository;
-    private final UserItemRepository userItemRepository;
-    private final ItemTemplateRepository itemTemplateRepository;
+
 
     @Autowired
-    public UserController(UserRepository userRepository, UserItemRepository userItemRepository, ItemTemplateRepository itemTemplateRepository) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userItemRepository = userItemRepository;
-        this.itemTemplateRepository = itemTemplateRepository;
     }
 
     @GetMapping(path = {"/", "/index"})
@@ -99,62 +92,5 @@ public class UserController {
         userRepository.delete(user);
 
         return "redirect:/users";
-    }
-
-    @GetMapping("/items")
-    public String showItemList(@RequestParam("owner") int id,
-                               @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                               @RequestParam(value = "ippg", required = false, defaultValue = "7") int itemsPerPage,
-                               Model model) {
-
-        Page<UserItem> items = userItemRepository.findAllByUserIdOrderById(id, PageRequest.of(page - 1, itemsPerPage));
-
-        model.addAttribute("userItems", items);
-        model.addAttribute("curPage", page);
-        model.addAttribute("totalPages", items.getTotalPages());
-        model.addAttribute("items", itemTemplateRepository.findAllByOrderById());
-        model.addAttribute("itemTemplateWrapper", new ItemTemplateWrapper());
-        model.addAttribute("userId", id);
-        return "items";
-    }
-
-    @PostMapping("/additem")
-    public String addItemToUser(@RequestParam("owner") int userId, @Valid ItemTemplateWrapper wrapper, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "items";
-        }
-
-        userItemRepository.save(new UserItem(wrapper.getItem(), userId));
-        return "redirect:/items?owner=" + userId;
-    }
-
-    @GetMapping("/edit/items")
-    public String showItemUpdateForm(@RequestParam("itemId") int itemId, Model model) {
-        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
-        model.addAttribute("item", item);
-
-        return "update-item";
-    }
-
-    @PostMapping("/update/items")
-    public String updateItem(@RequestParam("itemId") int itemId, @Valid UserItem dummy, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            dummy.setId(itemId);
-            return "update-item";
-        }
-
-        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
-
-        userItemRepository.save(item.mergedWith(dummy));
-
-        return "redirect:/items?owner=" + item.getUserId();
-    }
-
-    @GetMapping("/delete/items")
-    public String deleteItem(@RequestParam("itemId") int itemId, Model model) {
-        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item Id " + itemId));
-        userItemRepository.delete(item);
-
-        return "redirect:/items?owner=" + item.getUserId();
     }
 }
