@@ -1,10 +1,13 @@
 package com.baeldung.crud.entities;
 
+import com.baeldung.crud.entities.converters.DateToStringConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -28,7 +31,9 @@ public class ItemTemplate {
     String cost;
     String count;
     String damage;
-    String dt;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Convert(converter = DateToStringConverter.class)
+    LocalDate dt;
     String gc;
     String grouping;
     String hint;
