@@ -47,7 +47,7 @@ public class UserController {
         PageRequest request = PageRequest.of(page - 1, usersPerPage);
         Page<User> users = login == null ?
                 userRepository.findAllByOrderById(request) :
-                userRepository.findAllByLogin(login, request);
+                userRepository.findAllByLoginContains(login, request);
 
         model.addAttribute("curPage", page);
         model.addAttribute("totalPages", users.getTotalPages());
