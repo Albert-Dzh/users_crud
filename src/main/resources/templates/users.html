@@ -42,7 +42,7 @@
                     </tr>
                 </tbody>
             </table>
-            <nav aria-label="Pagination" th:if="${totalPages > 0}">
+            <nav aria-label="Pagination" th:if="${totalPages > 1}">
                 <ul class="pagination justify-content-center font-weight-medium">
                     <th:block th:each="i : ${#numbers.sequence(1, totalPages)}"
                               th:with="validPage=${i == 1 || (i >= curPage - 3 && i <= curPage + 3) || i == totalPages}">
