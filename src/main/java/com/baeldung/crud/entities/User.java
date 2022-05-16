@@ -76,4 +76,3 @@ public class User {
     @Convert(converter = DateToLongConverter.class)
     private LocalDate forumblock;
 }
-
