@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-    Page<User> findAllByLoginContainsOrderById(String login, Pageable pageable);
+    Page<User> findAllByLoginContainsIgnoreCaseOrderById(String login, Pageable pageable);
     Page<User> findAllByOrderById(Pageable pageable);
 }
