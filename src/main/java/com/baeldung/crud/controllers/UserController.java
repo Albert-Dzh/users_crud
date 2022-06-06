@@ -52,13 +52,15 @@ public class UserController {
     @GetMapping("/adduser")
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new User());
-        return "add-user";
+        model.addAttribute("title", "Add new User");
+
+        return "add-or-upd-user";
     }
 
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-user";
+            return "add-or-upd-user";
         }
 
         userRepository.save(user);
@@ -70,15 +72,16 @@ public class UserController {
     public String showUserUpdateForm(@RequestParam("id") int id, Model model) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("user", user);
+        model.addAttribute("title", String.format("Edit user %s", user.getLogin()));
 
-        return "update-user";
+        return "add-or-upd-user";
     }
 
     @PostMapping("/update/users")
     public String updateUser(@RequestParam("id") int id, @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
-            return "update-user";
+            return "add-or-upd-user";
         }
 
         userRepository.save(user);
