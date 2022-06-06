@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<body>
+    <th:block th:fragment="input (label, fieldName, type)">
+        <div class="form-group col-md-3" th:switch="${type}">
+            <label th:for="${fieldName}" class="col-form-label" th:text="${label}"></label>
+            <input th:case="'text'"     class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="text"/>
+            <input th:case="'date'"     class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="date"/>
+            <input th:case="'email'"    class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="email"/>
+            <input th:case="'number'"   class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="number" th:min="1"/>
+            <input th:case="'ranks'"    class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="number" th:min="0" th:max="10000"/>
+            <input th:case="'exp'"      class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="number" th:min="1" th:max="94000000"/>
+            <input th:case="'propwr'"   class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}" th:placeholder="${fieldName}" type="number" th:min="0" th:max="1" th:step="0.1"/>
+            <select th:case="'priv'" class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}">
+                <option th:value="1">god</option>
+                <option th:value="0">standard</option>
+            </select>
+            <select th:case="'sex'" class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}">
+                <option th:value="1">male</option>
+                <option th:value="0">female</option>
+            </select>
+            <select th:case="'bot'" class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}">
+                <option th:value="0">casual account</option>
+                <option th:value="1">bot account</option>
+            </select>
+            <select th:case="'pro'" class="form-control" th:field="*{__${fieldName}__}" th:id="${fieldName}">
+                <option th:value="1">corsair</option>
+                <option th:value="2">stalker</option>
+                <option th:value="3">prospector</option>
+                <option th:value="4">engineer</option>
+                <option th:value="5">mercenary</option>
+                <option th:value="6">merchant</option>
+                <option th:value="7">police(patrol)</option>
+                <option th:value="8">police(stormtrooper)</option>
+                <option th:value="9">police(specialist)</option>
+                <option th:value="10">journalist</option>
+                <option th:value="11">official</option>
+                <option th:value="12">psyonic</option>
+                <option th:value="13">prisoner</option>
+                <option th:value="14">psy-kinetic</option>
+                <option th:value="15">psy-medium</option>
+                <option th:value="16">psy-leader</option>
+                <option th:value="26">cargo robot</option>
+                <option th:value="27">landing robot</option>
+                <option th:value="28">combat robot</option>
+                <option th:value="30">dealer</option>
+            </select>
+            <span th:if="${#fields.hasErrors(fieldName)}" th:errors="*{__${fieldName}__}" class="text-danger"></span>
+        </div>
+    </th:block>
+</body>
+</html>
