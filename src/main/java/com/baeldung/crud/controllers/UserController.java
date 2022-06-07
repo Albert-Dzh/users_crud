@@ -45,6 +45,7 @@ public class UserController {
         model.addAttribute("curPage", page);
         model.addAttribute("totalPages", users.getTotalPages());
         model.addAttribute("users", users);
+        model.addAttribute("search", login);
 
         return "users";
     }
