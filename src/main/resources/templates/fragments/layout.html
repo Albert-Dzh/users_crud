@@ -23,5 +23,15 @@
                 </ul>
             </div>
         </nav>
+        <nav th:fragment="common_pagination (totalP, currP, path)">
+            <ul class="pagination justify-content-center font-weight-medium">
+                <th:block th:each="i : ${#numbers.sequence(1, totalP)}"
+                          th:with="isDisabled=${i == currP - 4 || i == currP + 4}, validP=${i== 1 || (i >= currP - 3 && i <= currP + 3) || i == totalP}">
+                    <li th:if="${validP || isDisabled}" th:class="page-item" th:classappend="${currP == i} ? 'active' : (${isDisabled && !validP} ? 'disabled')">
+                        <a th:class="page-link" th:text="${isDisabled && !validP} ? '...' : ${i}" th:href="@{${path}(page=${i})}"></a>
+                    </li>
+                </th:block>
+            </ul>
+        </nav>
     </body>
 </html>
