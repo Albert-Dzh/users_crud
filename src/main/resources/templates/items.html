@@ -38,7 +38,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <nav th:if="${totalPages > 1}" th:replace="~{/fragments/layout :: common_pagination (${totalPages}, ${curPage}, @{/items(owner=${userId})})}"></nav>
+                <nav th:replace="~{/fragments/layout :: common_pagination (${totalPages}, ${curPage}, @{/items(owner=${userId})})}"></nav>
             </div>
         </div>
 
