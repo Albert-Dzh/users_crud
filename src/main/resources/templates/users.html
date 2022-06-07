@@ -4,7 +4,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand nav-link" href="#">Users</a>
+                <a class="navbar-brand nav-link" href="/users">Users</a>
             </div>
             <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/users}">
                 <input type="search" class="form-control mr-sm-2" placeholder="Enter login..." aria-label="Search" id="search-input" name="search">
@@ -33,16 +33,7 @@
                     </tr>
                 </tbody>
             </table>
-            <nav aria-label="Pagination" th:if="${totalPages > 1}">
-                <ul class="pagination justify-content-center font-weight-medium">
-                    <th:block th:each="i : ${#numbers.sequence(1, totalPages)}"
-                              th:with="isDisabled=${i == curPage - 4 || i == curPage + 4}, validPage=${i == 1 || (i >= curPage - 3 && i <= curPage + 3) || i == totalPages}">
-                        <li th:if="${validPage || isDisabled}" th:class="page-item" th:classappend="${curPage == i} ? 'active' : (${isDisabled && !validPage} ? 'disabled')">
-                            <a th:class="page-link" th:text="${isDisabled && !validPage} ? '...' : ${i}" th:href="@{/users(page=${i})}"></a>
-                        </li>
-                    </th:block>
-                </ul>
-            </nav>
+            <nav th:if="${totalPages > 1}" th:replace="~{fragments/layout :: common_pagination (${totalPages}, ${curPage}, '/users' + (${search} ? '?search=' + ${search} : ''))}"></nav>
         </div>
     </body>
 </html>

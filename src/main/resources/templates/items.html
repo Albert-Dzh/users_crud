@@ -38,16 +38,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <nav aria-label="Pagination" th:if="${totalPages > 1}">
-                    <ul class="pagination justify-content-center font-weight-medium">
-                        <th:block th:each="i : ${#numbers.sequence(1, totalPages)}"
-                                  th:with="isDisabled=${i == curPage - 4 || i == curPage + 4}, validPage=${i == 1 || (i >= curPage - 3 && i <= curPage + 3) || i == totalPages}">
-                            <li th:if="${validPage || isDisabled}" th:class="page-item" th:classappend="${curPage == i} ? 'active' : (${isDisabled && !validPage} ? 'disabled')">
-                                <a th:class="page-link" th:text="${isDisabled && !validPage} ? '...' : ${i}" th:href="@{/items(owner=${userId}, page=${i})}"></a>
-                            </li>
-                        </th:block>
-                    </ul>
-                </nav>
+                <nav th:if="${totalPages > 1}" th:replace="~{/fragments/layout :: common_pagination (${totalPages}, ${curPage}, @{/items(owner=${userId})})}"></nav>
             </div>
         </div>
 
