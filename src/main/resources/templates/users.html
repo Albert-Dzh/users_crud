@@ -4,8 +4,8 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand nav-link" href="/users">Users</a>
-        </div>
+                <a class="navbar-brand nav-link" th:href="@{/users}">Users</a>
+            </div>
             <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/users}">
                 <input type="search" class="form-control mr-sm-2" placeholder="Enter login..." aria-label="Search" id="search-input" name="search">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
