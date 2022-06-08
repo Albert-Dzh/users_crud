@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head th:replace="~{fragments/layout :: common_header ('HeckZero :: update item')}"></head>
+    <head th:replace="~{fragments/layout :: common_header ('HeckZero :: update user item')}"></head>
     <body>
         <nav th:replace="~{fragments/layout :: common_nav ('Edit item ' + ${item.txt}, 'Back to user items', @{/items(owner=${item.userId})})}"></nav>
         <div class="container my-5">
