@@ -2,6 +2,7 @@ package com.baeldung.crud.controllers;
 
 import com.baeldung.crud.entities.UserItem;
 import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
+import com.baeldung.crud.exceptions.ItemNotFoundException;
 import com.baeldung.crud.repositories.ItemTemplateRepository;
 import com.baeldung.crud.repositories.UserItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,7 @@ public class ItemsController {
 
     @GetMapping("/edit/items")
     public String showItemUpdateForm(@RequestParam("itemId") int itemId, Model model) {
-        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
+        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new ItemNotFoundException(itemId));
         model.addAttribute("item", item);
 
         return "update-item";
@@ -78,7 +79,7 @@ public class ItemsController {
             return "update-item";
         }
 
-        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item id " + itemId));
+        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new ItemNotFoundException(itemId));
 
         userItemRepository.save(item.mergedWith(dummy));
 
@@ -87,7 +88,7 @@ public class ItemsController {
 
     @GetMapping("/delete/items")
     public String deleteItem(@RequestParam("itemId") int itemId, Model model) {
-        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid item Id " + itemId));
+        UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new ItemNotFoundException(itemId));
         userItemRepository.delete(item);
 
         return "redirect:/items?owner=" + item.getUserId();

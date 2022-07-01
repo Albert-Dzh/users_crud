@@ -2,6 +2,7 @@ package com.baeldung.crud.controllers;
 
 import javax.validation.Valid;
 
+import com.baeldung.crud.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -71,7 +72,7 @@ public class UserController {
 
     @GetMapping("/edit/users")
     public String showUserUpdateForm(@RequestParam("id") int id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         model.addAttribute("user", user);
         model.addAttribute("title", String.format("Edit user %s", user.getLogin()));
 
@@ -95,7 +96,7 @@ public class UserController {
 
     @GetMapping("/delete/users")
     public String deleteUser(@RequestParam("id") int id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
 
         return "redirect:/users";
