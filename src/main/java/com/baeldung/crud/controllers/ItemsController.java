@@ -37,17 +37,21 @@ public class ItemsController {
 
         Page<UserItem> items = userItemRepository.findAllByUserIdOrderById(id, PageRequest.of(page - 1, itemsPerPage));
 
-        model.addAttribute("userItems", items);
-        model.addAttribute("curPage", page);
-        model.addAttribute("totalPages", items.getTotalPages());
-        model.addAttribute("items", itemTemplateRepository.findAllByOrderById());
-        model.addAttribute("itemTemplateWrapper", new ItemTemplateWrapper());
-        model.addAttribute("userId", id);
+        model.addAttribute("userItems",             items);
+        model.addAttribute("curPage",               page);
+        model.addAttribute("totalPages",            items.getTotalPages());
+        model.addAttribute("items",                 itemTemplateRepository.findAllByOrderById());
+        model.addAttribute("itemTemplateWrapper",   new ItemTemplateWrapper());
+        model.addAttribute("userId",                id);
+
         return "items";
     }
 
     @PostMapping("/additem")
-    public String addItemToUser(@RequestParam("owner") int userId, @Valid ItemTemplateWrapper wrapper, BindingResult result, Model model) {
+    public String addItemToUser(@RequestParam("owner") int userId,
+                                @Valid ItemTemplateWrapper wrapper,
+                                BindingResult result,
+                                Model model) {
         if (result.hasErrors()) {
             return "items";
         }
@@ -65,7 +69,10 @@ public class ItemsController {
     }
 
     @PostMapping("/update/items")
-    public String updateItem(@RequestParam("itemId") int itemId, @Valid UserItem dummy, BindingResult result, Model model) {
+    public String updateItem(@RequestParam("itemId") int itemId,
+                             @Valid UserItem dummy,
+                             BindingResult result,
+                             Model model) {
         if (result.hasErrors()) {
             dummy.setId(itemId);
             return "update-item";

@@ -42,10 +42,10 @@ public class UserController {
                 userRepository.findAllByOrderById(request) :
                 userRepository.findAllByLoginContainsIgnoreCaseOrderById(login, request);
 
-        model.addAttribute("curPage", page);
-        model.addAttribute("totalPages", users.getTotalPages());
-        model.addAttribute("users", users);
-        model.addAttribute("search", login);
+        model.addAttribute("curPage",       page);
+        model.addAttribute("totalPages",    users.getTotalPages());
+        model.addAttribute("users",         users);
+        model.addAttribute("search",        login);
 
         return "users";
     }
@@ -79,7 +79,10 @@ public class UserController {
     }
 
     @PostMapping("/update/users")
-    public String updateUser(@RequestParam("id") int id, @Valid User user, BindingResult result, Model model) {
+    public String updateUser(@RequestParam("id") int id,
+                             @Valid User user,
+                             BindingResult result,
+                             Model model) {
         if (result.hasErrors()) {
             user.setId(id);
             return "add-or-upd-user";
