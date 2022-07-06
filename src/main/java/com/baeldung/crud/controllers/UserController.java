@@ -1,24 +1,26 @@
 package com.baeldung.crud.controllers;
 
-import javax.validation.Valid;
-
+import com.baeldung.crud.entities.User;
 import com.baeldung.crud.exceptions.UserNotFoundException;
+import com.baeldung.crud.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.baeldung.crud.entities.User;
-import com.baeldung.crud.repositories.UserRepository;
+import javax.validation.Valid;
 
 
 @Controller
 @SuppressWarnings("UnusedParameters")
 public class UserController {
-    
+
     private final UserRepository userRepository;
 
 
@@ -56,13 +58,13 @@ public class UserController {
         model.addAttribute("user", new User());
         model.addAttribute("title", "Add new User");
 
-        return "add-or-upd-user";
+        return "add-user";
     }
 
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-or-upd-user";
+            return "add-user";
         }
 
         userRepository.save(user);
@@ -76,7 +78,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("title", String.format("Edit user %s", user.getLogin()));
 
-        return "add-or-upd-user";
+        return "upd-user";
     }
 
     @PostMapping("/update/users")
@@ -86,7 +88,7 @@ public class UserController {
                              Model model) {
         if (result.hasErrors()) {
             user.setId(id);
-            return "add-or-upd-user";
+            return "upd-user";
         }
 
         userRepository.save(user);

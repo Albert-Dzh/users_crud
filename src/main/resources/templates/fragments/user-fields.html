@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<!--suppress HtmlRequiredTitleElement, HtmlFormInputWithoutLabel -->
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head th:replace="~{fragments/layout :: common_header ('HeckZero :: user management')}"></head>
-    <body>
-        <nav th:replace="~{fragments/layout :: common_nav (${title}, 'Home', '/')}"></nav>
+
+<body>
+    <th:block th:fragment="all_fields (href, user)">
         <div class="container my-5">
-            <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+            <form action="#" th:action="${href}" th:object="${user}" method="post">
                 <div class="row">
                     <input th:replace="~{fragments/user-field :: input ('Login',            'login',        'text')}"/>
                     <input th:replace="~{fragments/user-field :: input ('Password',         'password',     'text')}"/>
@@ -40,5 +39,5 @@
                 </div>
             </form>
         </div>
-    </body>
-</html>
+    </th:block>
+</body>

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<!--suppress HtmlRequiredTitleElement, HtmlFormInputWithoutLabel -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/layout :: common_header ('HeckZero :: user management')}"></head>
+    <body>
+        <nav th:replace="~{fragments/layout :: common_nav (${title}, 'Home', '/')}"></nav>
+        <div th:replace="~{fragments/user-fields :: all_fields (@{/adduser}, ${user})}"></div>
+    </body>
+</html>
