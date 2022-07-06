@@ -5,6 +5,7 @@ import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
 import com.baeldung.crud.exceptions.ItemNotFoundException;
 import com.baeldung.crud.repositories.ItemTemplateRepository;
 import com.baeldung.crud.repositories.UserItemRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -66,7 +67,7 @@ public class ItemsController {
         UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new ItemNotFoundException(itemId));
         model.addAttribute("item", item);
 
-        return "update-item";
+        return "upd-item";
     }
 
     @PostMapping("/update/items")
@@ -76,7 +77,7 @@ public class ItemsController {
                              Model model) {
         if (result.hasErrors()) {
             dummy.setId(itemId);
-            return "update-item";
+            return "upd-item";
         }
 
         UserItem item = userItemRepository.findById(itemId).orElseThrow(() -> new ItemNotFoundException(itemId));
