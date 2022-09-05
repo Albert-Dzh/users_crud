@@ -1,4 +1,4 @@
-package com.baeldung.crud.exceptions;
+package com.users.crud.exceptions;
 
 public class ItemNotFoundException extends RuntimeException {
     public ItemNotFoundException(int id) {

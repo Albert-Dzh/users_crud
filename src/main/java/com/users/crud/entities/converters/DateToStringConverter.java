@@ -1,4 +1,4 @@
-package com.baeldung.crud.entities.converters;
+package com.users.crud.entities.converters;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

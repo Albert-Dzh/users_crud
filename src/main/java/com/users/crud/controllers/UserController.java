@@ -1,8 +1,8 @@
-package com.baeldung.crud.controllers;
+package com.users.crud.controllers;
 
-import com.baeldung.crud.entities.User;
-import com.baeldung.crud.exceptions.UserNotFoundException;
-import com.baeldung.crud.repositories.UserRepository;
+import com.users.crud.entities.User;
+import com.users.crud.exceptions.UserNotFoundException;
+import com.users.crud.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
-package com.baeldung.crud.entities;
+package com.users.crud.entities;
 
-import com.baeldung.crud.entities.converters.DateToStringConverter;
+import com.users.crud.entities.converters.DateToStringConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

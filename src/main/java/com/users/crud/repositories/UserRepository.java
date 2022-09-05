@@ -1,6 +1,6 @@
-package com.baeldung.crud.repositories;
+package com.users.crud.repositories;
 
-import com.baeldung.crud.entities.User;
+import com.users.crud.entities.User;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

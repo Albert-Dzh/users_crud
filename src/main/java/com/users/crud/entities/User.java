@@ -1,6 +1,6 @@
-package com.baeldung.crud.entities;
+package com.users.crud.entities;
 
-import com.baeldung.crud.entities.converters.DateToLongConverter;
+import com.users.crud.entities.converters.DateToLongConverter;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

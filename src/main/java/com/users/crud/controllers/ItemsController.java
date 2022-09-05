@@ -1,10 +1,10 @@
-package com.baeldung.crud.controllers;
+package com.users.crud.controllers;
 
-import com.baeldung.crud.entities.UserItem;
-import com.baeldung.crud.entities.wrapper.ItemTemplateWrapper;
-import com.baeldung.crud.exceptions.ItemNotFoundException;
-import com.baeldung.crud.repositories.ItemTemplateRepository;
-import com.baeldung.crud.repositories.UserItemRepository;
+import com.users.crud.entities.UserItem;
+import com.users.crud.entities.wrapper.ItemTemplateWrapper;
+import com.users.crud.exceptions.ItemNotFoundException;
+import com.users.crud.repositories.ItemTemplateRepository;
+import com.users.crud.repositories.UserItemRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
-package com.baeldung.crud.repositories;
+package com.users.crud.repositories;
 
-import com.baeldung.crud.entities.ItemTemplate;
+import com.users.crud.entities.ItemTemplate;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

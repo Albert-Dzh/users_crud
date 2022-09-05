@@ -1,4 +1,4 @@
-package com.baeldung.crud.exceptions;
+package com.users.crud.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(int id) {
